@@ -25,19 +25,21 @@ const App = () => {
 
   }
 
+  const Part = (props) => {
+    return (
+      <p>
+        {props.content.name} {props.content.exercises}
+      </p>
+    )
+  }
+
   const Content = (props) => {
 
     return (
       <>
-        <p>
-        {props.content[0].name} {props.content[0].exercises}
-        </p>
-        <p>
-        {props.content[1].name} {props.content[1].exercises}
-        </p>
-        <p>
-        {props.content[2].name} {props.content[2].exercises}
-        </p>
+        <Part content={props.content[0]}/>
+        <Part content={props.content[1]}/>
+        <Part content={props.content[2]}/>
       </>
     )
 

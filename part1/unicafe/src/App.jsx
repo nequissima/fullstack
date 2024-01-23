@@ -12,6 +12,19 @@ const StatisticLine = (props) => {
   )
 }
 
+const StatisticLineTable = (props) => {
+  return (
+    <tr>
+      <th>
+        {props.text}
+      </th>
+      <td>
+        {props.value}
+      </td>
+    </tr>
+  )
+}
+
 const Statistics = (props) => {
   if (props.inputs !== 0) {
     return (
@@ -23,6 +36,29 @@ const Statistics = (props) => {
         <StatisticLine text={'average'} value={props.average}/>
         <StatisticLine text={'% positive'} value={props.percentPositive}/>
       </p>
+    )
+  } else {
+    return (
+      <p>
+        No feedback yet.
+      </p>
+    )
+  }
+}
+
+const StatisticsTable = (props) => {
+  if (props.inputs !== 0) {
+    return (
+      <table>
+        <tbody>
+          <StatisticLineTable text={'good'} value={props.good}/>
+          <StatisticLineTable text={'neutral'} value={props.neutral}/>
+          <StatisticLineTable text={'bad'} value={props.bad}/>
+          <StatisticLineTable text={'all'} value={props.inputs}/>
+          <StatisticLineTable text={'average'} value={props.average}/>
+          <StatisticLineTable text={'% positive'} value={props.percentPositive}/>
+        </tbody>
+      </table>
     )
   } else {
     return (
@@ -68,7 +104,7 @@ const App = () => {
         <Button text={'bad'} handleClick={() => handleUpdate(bad, setBad, -1)}/>
       </div>
       <h2>Statistics</h2>
-      <Statistics good={good} neutral={neutral} bad={bad} inputs={inputs} average={average} percentPositive={percentPositive}/>
+      <StatisticsTable good={good} neutral={neutral} bad={bad} inputs={inputs} average={average} percentPositive={percentPositive}/>
     </div>
   )
 }

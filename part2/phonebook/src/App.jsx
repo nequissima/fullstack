@@ -20,9 +20,15 @@ const App = () => {
 
   const addNote = (event) => {
     event.preventDefault()
-    const newpersons = [...persons].concat({name: newName})
-    console.log(newpersons)
-    setPersons(newpersons)
+    
+    if (persons.find(number => number.name === newName) === undefined) {
+      const newpersons = [...persons].concat({name: newName})
+      console.log(newpersons)
+      setPersons(newpersons)
+    } else {
+      alert(`${newName} is already added to the notebook`)
+    }
+    
   }
 
   const handleNameChange = (event) => {

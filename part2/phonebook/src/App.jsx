@@ -4,10 +4,12 @@ const Number = (person) => {
   return(<li key={person.name}>{person.name} {person.number}</li>)
 }
 
-const Numbers = ({persons}) => {
+const Numbers = ({persons, filter}) => {
+  let list = persons.filter((person) => person.name.toLowerCase().includes(filter.toLowerCase()))
+
   return(
     <ul>
-      {persons.map(person => Number(person))}
+      {list.map((person) => Number(person))}
     </ul>
   )
 }
@@ -21,6 +23,7 @@ const App = () => {
   ]) 
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
+  const [newSearch, setNewSearch] = useState('')
 
   const addNote = (event) => {
     event.preventDefault()
@@ -36,18 +39,27 @@ const App = () => {
   }
 
   const handleNameChange = (event) => {
-    console.log(event.target.value)
+    // console.log(event.target.value)
     setNewName(event.target.value)
   }
 
   const handleNumberChange = (event) => {
-    console.log(event.target.value)
     setNewNumber(event.target.value)
+  }
+
+  const handleSearchChange = (event) => {
+    setNewSearch(event.target.value)
   }
 
   return (
     <div>
       <h2>Phonebook</h2>
+
+      <div>
+        search: <input value={newSearch} onChange={handleSearchChange}/>
+      </div>
+
+      <h2>Add new person</h2>
       <form onSubmit={addNote}>
         <div>
           name: <input value={newName} onChange={handleNameChange}/>
@@ -60,7 +72,7 @@ const App = () => {
         </div>
       </form>
       <h2>Numbers</h2>
-      <Numbers persons={persons}/>
+      <Numbers persons={persons} filter={newSearch}/>
     </div>
   )
 
